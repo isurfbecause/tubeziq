@@ -1,0 +1,25 @@
+<div class="jumbotron">
+	<input type="text" ng-model="term" value="chillstep">
+	<button class="btn btn-primary" ng-click="search()">Search</button>
+
+	<script>
+	 function onYouTubePlayerReady(playerId) {
+			ytplayer = document.getElementById("myytplayer");
+		}
+	</script>
+	
+	<div class="controls" ng-show="showControls">	
+		<i class="fa fa-step-backward fa-2x"></i>
+		<i class="{{playIcon}}" ng-click="play()"></i>
+		<i class="fa fa-step-forward fa-2x"></i>
+	</div>
+
+	<div ng-repeat="song in songs">
+		<a href ng-click="loadSong(song.link[0].href)">{{song.title.$t}}</a>
+	</div>
+
+	<div id="ytapiplayer" ng-model="ytapiplayer">
+	</div>
+	
+</div>
+

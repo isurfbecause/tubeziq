@@ -21,13 +21,14 @@
 		<i class="fa {{ muteIcon }} fa-2x" ng-click="mute()"></i>
 	</div>
 
-	<div class="time" ng-model="elapsedTime">
+	<!-- <div class="time" ng-model="elapsedTime">
 		{{elapsedTime}}
 	</div>
-
+ -->
 	<ul class="results">
 		<li ng-repeat="song in songs" ng-class="{'results-result-active': song.link[0].href == selected}">
-			<a href ng-click="loadSong(song.link[0].href)">{{$index + 1}}. {{song.title.$t}}</a>
+			<a href ng-click="loadSong(song.link[0].href)">{{$index + 1}}. {{song.title.$t}}</a> 
+			<span class="results-result-elapsed-time" ng-if="song.link[0].href == selected"> {{elapsedTime}} </span>
 		</li>
 	</ul>
 

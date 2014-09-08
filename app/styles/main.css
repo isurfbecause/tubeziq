@@ -16,3 +16,7 @@ ul{
 .results-result-active{
     background-color: #FFFFFF;
 }
+
+.results-result-elapsed-time{
+    margin-left: 10px;
+}

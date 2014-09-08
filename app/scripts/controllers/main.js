@@ -8,55 +8,88 @@ angular.module('tubeziqApp')
         };
     }])
 
-    .controller('MainCtrl', function ($scope,$http,$filter) {
-        var flag        = 1;
-        $scope.term     = 'chillstep';
-        $scope.playIcon = 'fa fa-play fa-2x';
+    .controller('MainCtrl', function ($scope,$http,$filter,utilFactory,services) {
+        console.log(services); 
+                    
+        var playAudio   = true;
     
         var params      = { allowScriptAccess: "always" };
         var atts        = { id: "myytplayer" };
         swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
                            "ytapiplayer", "425", "356", "8", null, null, params, atts);
         
+        $scope.term     = 'chillstep';
+        $scope.playIcon = 'fa-play';
+        $scope.muteIcon = 'fa-volume-up ';
+        $scope.timer;
+
+        var time         = 0;
+        var elapsedTime  = 0;
+        var durationTime = 0;
+        var duration     = 0;
+
+        $scope.getCurrentTime = function(){
+            
+            $scope.$apply(function(){
+                time = utilFactory.secondsToMinutes( ytplayer.getCurrentTime() );
+                elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
+
+                durationTime = utilFactory.secondsToMinutes( ytplayer.getDuration() );          
+                duration  = durationTime.minutes.toFixed() + ':' + durationTime.seconds.toFixed();;          
+                $scope.elapsedTime = elapsedTime + ' / ' + duration;
+            })
+
+            $scope.timer = setTimeout($scope.getCurrentTime, 1000);
+        };
+
         $scope.loadSong = function( code ){
             code                = $filter('code')(code);
             $scope.showControls = true;
+            $scope.playIcon     = 'fa-pause';
             myytplayer.loadVideoById(code, 5, "large")
-            $scope.playIcon     = 'fa fa-pause fa-2x';
-            flag                = 0;
+            playAudio           = false;
+
+            $scope.getCurrentTime();
+
         };
 
         $scope.play = function(){
-            if(flag){
-                $scope.playIcon = 'fa fa-pause fa-2x';
-                ytplayer.playVideo();
-                flag = 0;
+            if(playAudio){
+                $scope.playIcon = 'fa-pause';
+                ytplayer.playVideo();                            
+                $scope.getCurrentTime();
+                playAudio = false;
             }
             else{
-                $scope.playIcon = 'fa fa-play fa-2x';
+                clearTimeout($scope.timer);
+                $scope.playIcon = 'fa-play';
                 ytplayer.stopVideo();
-                flag = 1;
+                playAudio = true;
             }
         }
 
+        $scope.mute = function(){
+
+            if( ytplayer.isMuted() ) {
+                $scope.muteIcon = 'fa-volume-up';
+                ytplayer.unMute();
+            }
+            else{
+                $scope.muteIcon = 'fa-volume-off';
+                ytplayer.mute();
+            }
+           
+        }
+
         $scope.search = function(){
-
-            var maxResults = 5;
-            var searchUrl = 'https://gdata.youtube.com/feeds/api/videos?q=' + $scope.term + '&enablejsapi=1&max-results='+maxResults+'&caption=false&v=2&alt=json&callback=JSON_CALLBACK';
-            console.log(searchUrl); 
-                        
-
-            $http({method: 'JSONP', url: searchUrl}).
-                success(function(data, status, headers, config) {
-                    console.log(data.feed.entry);
+            var options = {searchTerm: $scope.term, maxResults:20 }
+            
+            services.search( options )
+                .success(function(data, status, headers, config) {
                     $scope.songs = data.feed.entry;
-
-                 // this callback will be called asynchronously
-                 // when the response is available
                 }).
-                error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                });
+               error(function(data, status, headers, config) {
+               });
+            
     };
   });

@@ -8,15 +8,22 @@
 		}
 	</script>
 	
-	<div class="controls" ng-show="showControls">	
+	<div class="playback-controls" ng-show="showControls">	
 		<i class="fa fa-step-backward fa-2x"></i>
-		<i class="{{playIcon}}" ng-click="play()"></i>
+		<i class="fa {{ playIcon }} fa-2x" ng-click="play()"></i>
 		<i class="fa fa-step-forward fa-2x"></i>
+		<i class="fa {{ muteIcon }} fa-2x" ng-click="mute()"></i>
 	</div>
 
-	<div ng-repeat="song in songs">
-		<a href ng-click="loadSong(song.link[0].href)">{{song.title.$t}}</a>
+	<div class="time" ng-model="elapsedTime">
+		{{elapsedTime}}
 	</div>
+
+	<ul>
+		<li ng-repeat="song in songs">
+			<a href ng-click="loadSong(song.link[0].href)">{{$index + 1}}. {{song.title.$t}}</a>
+		</li>
+	</ul>
 
 	<div id="ytapiplayer" ng-model="ytapiplayer">
 	</div>

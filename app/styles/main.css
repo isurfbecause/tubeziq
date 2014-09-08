@@ -3,3 +3,12 @@
     height: 0;
     width: 0;
 }
+
+ul{
+    padding: 0;
+    list-style-type: none;
+}
+
+.playback-controls .fa{
+    margin-left: 20px;
+}

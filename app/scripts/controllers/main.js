@@ -28,15 +28,19 @@ angular.module('tubeziqApp')
         // Display current playback time
         $scope.getCurrentTime = function(){
             
-            $scope.$apply(function(){
-                time = utilFactory.secondsToMinutes( ytplayer.getCurrentTime() );
-                elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
+            // If digest not in progress, apply
+            if(!$scope.$$phase) {
+                $scope.$apply(function(){
+                    time = utilFactory.secondsToMinutes( ytplayer.getCurrentTime() );
+                    elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
 
-                durationTime = utilFactory.secondsToMinutes( ytplayer.getDuration() );          
-                duration  = durationTime.minutes.toFixed() + ':' + durationTime.seconds.toFixed();;          
-                $scope.elapsedTime = elapsedTime + ' / ' + duration;
-            })
-
+                    durationTime = utilFactory.secondsToMinutes( ytplayer.getDuration() );          
+                    duration  = durationTime.minutes.toFixed() + ':' + durationTime.seconds.toFixed();;          
+                    $scope.elapsedTime = elapsedTime + ' / ' + duration;
+                })
+            }
+            
+            // Update playback time every second
             $scope.timer = setTimeout($scope.getCurrentTime, 1000);
         };
 
@@ -66,11 +70,10 @@ angular.module('tubeziqApp')
                 ytplayer.stopVideo();
                 playAudio = true;
             }
-        }
+        };
 
         // Mute playback
         $scope.mute = function(){
-
             if( ytplayer.isMuted() ) {
                 $scope.muteIcon = 'fa-volume-up';
                 ytplayer.unMute();
@@ -78,9 +81,8 @@ angular.module('tubeziqApp')
             else{
                 $scope.muteIcon = 'fa-volume-off';
                 ytplayer.mute();
-            }
-           
-        }
+            }  
+        };
 
         $scope.search = function(){
             var options = {searchTerm: $scope.term, maxResults:20 }

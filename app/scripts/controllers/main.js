@@ -15,7 +15,7 @@ angular.module('tubeziqApp')
         swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
                            "ytapiplayer", "425", "356", "8", null, null, params, atts);
         
-        $scope.term     = 'chillstep';
+        $scope.term     = '';
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer;
@@ -85,6 +85,9 @@ angular.module('tubeziqApp')
         };
 
         $scope.search = function(){
+            // Validate
+            if( !$scope.term.length ){ return }
+
             var options = {searchTerm: $scope.term, maxResults:20 }
 
             services.search( options )

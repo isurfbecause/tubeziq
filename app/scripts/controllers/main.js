@@ -9,8 +9,6 @@ angular.module('tubeziqApp')
     }])
 
     .controller('MainCtrl', function ($scope,$http,$filter,utilFactory,services) {
-        console.log(services); 
-                    
         var playAudio   = true;
     
         var params      = { allowScriptAccess: "always" };
@@ -83,7 +81,7 @@ angular.module('tubeziqApp')
 
         $scope.search = function(){
             var options = {searchTerm: $scope.term, maxResults:20 }
-            
+
             services.search( options )
                 .success(function(data, status, headers, config) {
                     $scope.songs = data.feed.entry;

@@ -1,6 +1,12 @@
 <div class="jumbotron">
-	<input type="text" ng-model="term" value="chillstep">
-	<button class="btn btn-primary" ng-click="search()">Search</button>
+	<div class="form-group">
+		<div class="input-group input-group-lg">
+		  	<span class="input-group-addon"><i class="fa fa-search"></i></span>
+			<input type="search" class="form-control" ng-model="term" value="chillstep" ng-enter="search()">
+		</div>
+
+	</div>
+	<!-- <button class="btn btn-primary" >Search</button> -->
 
 	<script>
 	 function onYouTubePlayerReady(playerId) {

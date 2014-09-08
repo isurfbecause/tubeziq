@@ -127,7 +127,7 @@ angular.module('tubeziqApp')
         $scope.search = function(){
             // Validate
             if( !$scope.term.length ){ return }
-
+            $scope.selectedIndex = -1;
             var options = {searchTerm: $scope.term, maxResults:20 }
 
             services.search( options )

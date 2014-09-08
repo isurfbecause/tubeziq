@@ -1,4 +1,5 @@
-angular.module('directives', [])
+angular.module('tubeziq.directives', [])
+    // From http://stackoverflow.com/questions/17470790/how-to-use-a-keypress-event-in-angularjs
     .directive('ngEnter', function () {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {

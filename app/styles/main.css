@@ -12,3 +12,7 @@ ul{
 .playback-controls .fa{
     margin-left: 20px;
 }
+
+.results-result-active{
+    background-color: #FFFFFF;
+}

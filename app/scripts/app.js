@@ -2,7 +2,7 @@
 
 angular
   .module('tubeziqApp', [
-    'ngRoute','directives'
+    'ngRoute','tubeziq.directives'
   ])
   .config(function ($routeProvider) {
     $routeProvider

@@ -25,8 +25,8 @@
 		{{elapsedTime}}
 	</div>
 
-	<ul>
-		<li ng-repeat="song in songs">
+	<ul class="results">
+		<li ng-repeat="song in songs" ng-class="{'results-result-active': song.link[0].href == selected}">
 			<a href ng-click="loadSong(song.link[0].href)">{{$index + 1}}. {{song.title.$t}}</a>
 		</li>
 	</ul>

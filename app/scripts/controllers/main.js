@@ -10,7 +10,6 @@ angular.module('tubeziqApp')
 
     .controller('MainCtrl', function ($scope,$http,$filter,utilFactory,services) {
         var playAudio   = true;
-    
         var params      = { allowScriptAccess: "always" };
         var atts        = { id: "myytplayer" };
         swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
@@ -18,7 +17,7 @@ angular.module('tubeziqApp')
         
         $scope.term     = 'chillstep';
         $scope.playIcon = 'fa-play';
-        $scope.muteIcon = 'fa-volume-up ';
+        $scope.muteIcon = 'fa-volume-up';
         $scope.timer;
 
         var time         = 0;
@@ -26,6 +25,7 @@ angular.module('tubeziqApp')
         var durationTime = 0;
         var duration     = 0;
 
+        // Display current playback time
         $scope.getCurrentTime = function(){
             
             $scope.$apply(function(){
@@ -40,7 +40,9 @@ angular.module('tubeziqApp')
             $scope.timer = setTimeout($scope.getCurrentTime, 1000);
         };
 
+        // Load song selected from search results
         $scope.loadSong = function( code ){
+            $scope.selected = code;
             code                = $filter('code')(code);
             $scope.showControls = true;
             $scope.playIcon     = 'fa-pause';
@@ -48,9 +50,9 @@ angular.module('tubeziqApp')
             playAudio           = false;
 
             $scope.getCurrentTime();
-
         };
 
+        // Play and pause
         $scope.play = function(){
             if(playAudio){
                 $scope.playIcon = 'fa-pause';
@@ -66,6 +68,7 @@ angular.module('tubeziqApp')
             }
         }
 
+        // Mute playback
         $scope.mute = function(){
 
             if( ytplayer.isMuted() ) {

@@ -16,7 +16,7 @@ angular.module('tubeziqApp')
         swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
                            "ytapiplayer", "425", "356", "8", null, null, params, atts);
         
-        $scope.term     = 'hiphop'; //Pre populate for easy testing
+        $scope.term     = ''; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer;
@@ -52,8 +52,11 @@ angular.module('tubeziqApp')
             // If digest not in progress, apply
             if(!$scope.$$phase) {
                 $scope.$apply(function(){
-                   $scope.elapsedTime = $scope.getCurrentTime();
 
+                    // Display playback time and duration
+                    $scope.elapsedTime = $scope.getCurrentTime();
+
+                    // When done play next song
                     if( $scope.playerStatus().isDone ){
                         $scope.skip('forward');
                     }
@@ -64,7 +67,7 @@ angular.module('tubeziqApp')
             $scope.timer = setTimeout($scope.runEverySecond, 1000);
         };
 
-        // Display current playback time
+        // Display playback time and duration
         $scope.getCurrentTime = function(){
             time = utilFactory.secondsToMinutes( ytplayer.getCurrentTime() );
             elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
@@ -82,7 +85,6 @@ angular.module('tubeziqApp')
 
         // Load song selected from search results
         $scope.loadSong = function( index ){
-            
             var songUrl         = $scope.getYouTubeUrl( index );
             var songCode        = $filter('extractYouTubeCode')(songUrl);
             $scope.selectedIndex= index;

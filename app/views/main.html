@@ -1,19 +1,15 @@
+<script>function onYouTubePlayerReady(playerId) { ytplayer = document.getElementById("myytplayer");}</script>
+
 <div class="jumbotron">
-	<div class="form-group">
-		<div class="input-group input-group-lg">
-		  	<span class="input-group-addon" ng-click="search()"><i class="fa fa-search"></i></span>
-			<input type="search" class="form-control" ng-model="term" value="chillstep" ng-enter="search()" ng-focus placeholder="Search music">
-		</div>
 
-	</div>
-	<!-- <button class="btn btn-primary" >Search</button> -->
+    <div class="form-group">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon" ng-click="search()"><i class="fa fa-search"></i></span>
+            <input type="search" class="form-control" ng-model="term" value="chillstep" ng-enter="search()" ng-focus placeholder="Search music">
+        </div>
 
-	<script>
-	 function onYouTubePlayerReady(playerId) {
-			ytplayer = document.getElementById("myytplayer");
-		}
-	</script>
-	
+    </div>
+
 	<div class="playback-controls" ng-show="showControls">	
 		<i class="fa fa-step-backward fa-2x" ng-click="skip('backward')"></i>
 		<i class="fa {{ playIcon }} fa-2x" ng-click="play()"></i>
@@ -21,19 +17,16 @@
 		<i class="fa {{ muteIcon }} fa-2x" ng-click="mute()"></i>
 	</div>
 
-	<!-- <div class="time" ng-model="elapsedTime">
-		{{elapsedTime}}
-	</div>
- -->
-	<ul class="results">
-		<li ng-repeat="song in songs" ng-class="{'results-result-active': $index == selectedIndex}">
-			<a href ng-click="loadSong($index)">{{$index + 1}}. {{song.title.$t}}</a> 
-			<span class="results-result-elapsed-time" ng-if="$index == selectedIndex"> {{elapsedTime}} </span>
-		</li>
-	</ul>
+    <div class="results">
+        <ul>
+            <li ng-repeat="song in songs" ng-class="{'results-result-active': $index == selectedIndex}">
+                <a href ng-click="loadSong($index)">{{$index + 1}}. {{song.title.$t}}</a> 
+                <span class="results-result-elapsed-time" ng-if="$index == selectedIndex"> {{elapsedTime}} </span>
+            </li>
+        </ul>
+    </div>
 
-	<div id="ytapiplayer" ng-model="ytapiplayer">
-	</div>
+	<div id="ytapiplayer" ng-model="ytapiplayer"></div>
 	
 </div>
 

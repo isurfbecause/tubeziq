@@ -5,7 +5,7 @@ angular.module('tubeziqApp')
 
             var searchTerm = options.searchTerm;
             var maxResults = options.maxResults;
-            var duration = 'short';
+            var duration = 'long';
 
             var searchUrl = 'https://gdata.youtube.com/feeds/api/videos?q=' + options.searchTerm + '&duration=' + duration + '&enablejsapi=1&max-results='+ options.maxResults +'&caption=false&v=2&alt=json&callback=JSON_CALLBACK';
             return $http({method: 'JSONP', url: searchUrl})                

@@ -12,4 +12,12 @@ angular.module('tubeziq.directives', [])
                 }
             });
         };
+    })
+
+    .directive('ngFocus', function () {
+        return{
+            link: function(scope, element, attrs){
+                element.focus(); 
+            }
+        };
     });

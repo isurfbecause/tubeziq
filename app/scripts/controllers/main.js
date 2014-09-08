@@ -95,6 +95,7 @@ angular.module('tubeziqApp')
             playAudio           = false;
 
             $scope.runEverySecond();
+            $scope.songTitle = $scope.songs[index].title.$t.substring(0, 40);
         };
 
         // Play and pause

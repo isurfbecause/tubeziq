@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('tubeziqApp')
-    .filter('code', ['$sce', function ($sce) {
+    //Refactor in youtube service
+    .filter('extractYouTubeCode', ['$sce', function ($sce) {
         return function(url) {
             var code = url.split('&')[0].split('=')[1];
             return code;
@@ -15,7 +16,7 @@ angular.module('tubeziqApp')
         swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
                            "ytapiplayer", "425", "356", "8", null, null, params, atts);
         
-        $scope.term     = '';
+        $scope.term     = 'hiphop'; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer;
@@ -25,35 +26,72 @@ angular.module('tubeziqApp')
         var durationTime = 0;
         var duration     = 0;
 
-        // Display current playback time
-        $scope.getCurrentTime = function(){
-            
+        $scope.skip = function( action ){
+            var newIndex = 0;              
+            if( action == 'forward' ){
+                newIndex = $scope.selectedIndex + 1;
+            }
+            else{
+                newIndex = $scope.selectedIndex - 1;
+            }
+                        
+            $scope.loadSong( newIndex );   
+        };
+
+        //Refactor to youtube service
+        $scope.playerStatus = function(){
+            return{
+                isDone : ytplayer.getPlayerState() === 0,
+                isPlaying : ytplayer.getPlayerState() === 1,
+                isPaused : ytplayer.getPlayerState() === 2,
+                isBuffering : ytplayer.getPlayerState() === 3,
+            };
+        };
+
+        $scope.runEverySecond = function(){
             // If digest not in progress, apply
             if(!$scope.$$phase) {
                 $scope.$apply(function(){
-                    time = utilFactory.secondsToMinutes( ytplayer.getCurrentTime() );
-                    elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
+                   $scope.elapsedTime = $scope.getCurrentTime();
 
-                    durationTime = utilFactory.secondsToMinutes( ytplayer.getDuration() );          
-                    duration  = durationTime.minutes.toFixed() + ':' + durationTime.seconds.toFixed();;          
-                    $scope.elapsedTime = elapsedTime + ' / ' + duration;
+                    if( $scope.playerStatus().isDone ){
+                        $scope.skip('forward');
+                    }
                 })
             }
             
             // Update playback time every second
-            $scope.timer = setTimeout($scope.getCurrentTime, 1000);
+            $scope.timer = setTimeout($scope.runEverySecond, 1000);
         };
 
+        // Display current playback time
+        $scope.getCurrentTime = function(){
+            time = utilFactory.secondsToMinutes( ytplayer.getCurrentTime() );
+            elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
+
+            durationTime = utilFactory.secondsToMinutes( ytplayer.getDuration() );          
+            duration  = durationTime.minutes.toFixed() + ':' + durationTime.seconds.toFixed();;          
+            return elapsedTime + ' / ' + duration;
+        };
+
+        // Refactor in youtube service
+        $scope.getYouTubeUrl = function( index ){
+            var url = $scope.songs[index].link[0].href; 
+            return url;
+        }
+
         // Load song selected from search results
-        $scope.loadSong = function( code ){
-            $scope.selected = code;
-            code                = $filter('code')(code);
+        $scope.loadSong = function( index ){
+            
+            var songUrl         = $scope.getYouTubeUrl( index );
+            var songCode        = $filter('extractYouTubeCode')(songUrl);
+            $scope.selectedIndex= index;
             $scope.showControls = true;
             $scope.playIcon     = 'fa-pause';
-            myytplayer.loadVideoById(code, 5, "large")
+            myytplayer.loadVideoById(songCode, 5, "large")
             playAudio           = false;
 
-            $scope.getCurrentTime();
+            $scope.runEverySecond();
         };
 
         // Play and pause
@@ -61,7 +99,7 @@ angular.module('tubeziqApp')
             if(playAudio){
                 $scope.playIcon = 'fa-pause';
                 ytplayer.playVideo();                            
-                $scope.getCurrentTime();
+                $scope.runEverySecond();
                 playAudio = false;
             }
             else{
@@ -91,7 +129,7 @@ angular.module('tubeziqApp')
             var options = {searchTerm: $scope.term, maxResults:20 }
 
             services.search( options )
-                .success(function(data, status, headers, config) {
+                .success(function(data, status, headers, config) {                               
                     $scope.songs = data.feed.entry;
                 }).
                error(function(data, status, headers, config) {

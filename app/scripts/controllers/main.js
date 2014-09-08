@@ -20,6 +20,7 @@ angular.module('tubeziqApp')
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer;
+        $scope.elapsedTime = '0:00 / 0:00';
 
         var time         = 0;
         var elapsedTime  = 0;

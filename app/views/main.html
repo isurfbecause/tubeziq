@@ -16,13 +16,13 @@
 		<i class="fa {{ playIcon }} fa-2x" ng-click="play()"></i>
 		<i class="fa fa-step-forward fa-2x" ng-click="skip('forward')"></i>
 		<i class="fa {{ muteIcon }} fa-2x" ng-click="mute()"></i>
+        <span class="results-result-elapsed-time"> {{elapsedTime}} </span>
 	</div>
 
     <div class="results">
         <ul>
             <li ng-repeat="song in songs" ng-class="{'results-result-active': $index == selectedIndex}">
                 <a href ng-click="loadSong($index)">{{$index + 1}}. {{song.title.$t}}</a> 
-                <span class="results-result-elapsed-time" ng-if="$index == selectedIndex"> {{elapsedTime}} </span>
             </li>
         </ul>
     </div>

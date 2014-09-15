@@ -9,23 +9,37 @@ angular.module('tubeziqApp')
         };
     }])
 
-    .controller('MainCtrl', function ($scope,$http,$filter,utilFactory,services) {
+
+
+    .controller('MainCtrl', function ($scope,$http,$filter,$window,utilFactory,services) {
+
         var playAudio   = true;
         var params      = { allowScriptAccess: "always" };
         var atts        = { id: "myytplayer" };
         swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
                            "ytapiplayer", "425", "356", "8", null, null, params, atts);
-        
+        var time         = 0;
+        var elapsedTime  = 0;
+        var durationTime = 0;
+        var duration     = 0;
+        var elSearch     = $('#search');
+
         $scope.term     = ''; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer;
         $scope.elapsedTime = '0:00 / 0:00';
 
-        var time         = 0;
-        var elapsedTime  = 0;
-        var durationTime = 0;
-        var duration     = 0;
+        //On keydown spacebar play and pause playback
+        angular.element($window).on('keydown', function(e) {
+
+            if( e.keyCode === 32 && $scope.songs && !elSearch.is(":focus")){
+                $scope.$apply(function(){
+                    $scope.play();
+                });
+                return false; // To prevent scroll down page
+            }
+        });
 
         $scope.skip = function( action ){
             var newIndex = 0;              

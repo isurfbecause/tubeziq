@@ -14,7 +14,6 @@ angular.module('tubeziqApp')
         var playAudio = true;
         var params = { allowScriptAccess: "always" };
         var atts = { id: "myytplayer" };
-        var swfobject = swfobject;
         swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
             "ytapiplayer", "425", "356", "8", null, null, params, atts);
         var time = 0;
@@ -22,8 +21,6 @@ angular.module('tubeziqApp')
         var durationTime = 0;
         var duration = 0;
         var elSearch = $('#search');
-        var ytplayer = ytplayer;
-        var myytplayer = myytplayer;
 
         $scope.term = ''; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
@@ -118,7 +115,7 @@ angular.module('tubeziqApp')
             else {
                 clearTimeout($scope.timer);
                 $scope.playIcon = 'fa-play';
-                ytplayer.stopVideo();
+                ytplayer.stopVideo()
                 playAudio = true;
             }
         };

@@ -1,11 +1,11 @@
 angular.module('tubeziq.directives', [])
     // From http://stackoverflow.com/questions/17470790/how-to-use-a-keypress-event-in-angularjs
-    .directive('ngEnter', function () {
+    .directive('tubeziqEnter', function () {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
                 if(event.which === 13) {
                     scope.$apply(function (){
-                        scope.$eval(attrs.ngEnter);
+                        scope.$eval(attrs.tubeziqEnter);
                     });
 
                     event.preventDefault();
@@ -14,10 +14,10 @@ angular.module('tubeziq.directives', [])
         };
     })
 
-    .directive('ngFocus', function () {
+    .directive('tubesiqFocus', function () {
         return{
             link: function(scope, element, attrs){
-                element.focus(); 
+                element.focus();
             }
         };
     });

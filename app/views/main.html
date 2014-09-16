@@ -1,4 +1,20 @@
-<script>function onYouTubePlayerReady(playerId) { ytplayer = document.getElementById("myytplayer");}</script>
+<div id="player"></div>
+
+<script>
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var ytplayer;
+    function onYouTubeIframeAPIReady() {
+        ytplayer = new YT.Player('player', {
+            height: '0',
+            width: '0',
+            videoId: 'M7lc1UVf-VE'
+        });
+    }
+</script>
 
 <div class="jumbotron">
 
@@ -12,24 +28,24 @@
 
     </div>
 
-	<div class="playback-controls" ng-show="showControls">	
-		<i class="fa fa-step-backward fa-2x" ng-click="skip('backward')"></i>
-		<i class="fa {{ playIcon }} fa-2x" ng-click="play()"></i>
-		<i class="fa fa-step-forward fa-2x" ng-click="skip('forward')"></i>
-		<i class="fa {{ muteIcon }} fa-2x" ng-click="mute()"></i>
-        <span class="results-result-elapsed-time"> {{elapsedTime}} </span>
-        <div>{{songTitle}}</div>
-	</div>
-
     <div class="results">
         <ul>
             <li ng-repeat="song in songs" ng-class="{'results-result-active': $index == selectedIndex}">
-                <a href ng-click="loadSong($index)">{{$index + 1}}. {{song.title.$t}}</a> 
+                <a href ng-click="loadSong($index)">{{$index + 1}}. {{song.title.$t}}</a>
             </li>
         </ul>
     </div>
 
-	<div id="ytapiplayer" ng-model="ytapiplayer"></div>
-	
+    <div class="playback-controls" ng-show="showControls">
+        <i class="fa fa-step-backward fa-2x" ng-click="skip('backward')"></i>
+        <i class="fa {{ playIcon }} fa-2x" ng-click="play()"></i>
+        <i class="fa fa-step-forward fa-2x" ng-click="skip('forward')"></i>
+        <i class="fa {{ muteIcon }} fa-2x" ng-click="mute()"></i>
+        <span class="results-result-elapsed-time"> {{elapsedTime}} </span>
+        <div>{{songTitle}}</div>
+    </div>
+
+	<div id="ytapiplayer"></div>
+
 </div>
 

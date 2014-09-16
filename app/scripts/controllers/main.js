@@ -12,10 +12,6 @@ angular.module('tubeziqApp')
     .controller('MainCtrl', function ($scope, $http, $filter, $window, $timeout, utilFactory, services) {
 
         var playAudio = true;
-        var params = { allowScriptAccess: "always" };
-        var atts = { id: "myytplayer" };
-        swfobject.embedSWF("http://www.youtube.com/v/bHQqvYy5KYo?enablejsapi=1&playerapiid=ytplayer&version=3",
-            "ytapiplayer", "425", "356", "8", null, null, params, atts);
         var time = 0;
         var elapsedTime = 0;
         var durationTime = 0;

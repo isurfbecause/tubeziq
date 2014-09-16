@@ -72,11 +72,12 @@ angular.module('tubeziqApp')
 
         // Display playback time and duration
         $scope.getCurrentTime = function () {
-            if( !$.isNumeric(ytplayer.getCurrentTime()) ){ return; }
-            time = utilFactory.secondsToMinutes(ytplayer.getCurrentTime());
+            var currentTime = ytplayer.getCurrentTime();
+            if( !$.isNumeric( currentTime ) ){ return; }
+            time = utilFactory.secondsToMinutes( currentTime );
             elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
 
-            durationTime = utilFactory.secondsToMinutes(ytplayer.getDuration());
+            durationTime = utilFactory.secondsToMinutes( ytplayer.getDuration() );
             duration = durationTime.minutes.toFixed() + ':' + durationTime.seconds.toFixed();
 
             return elapsedTime + ' / ' + duration;

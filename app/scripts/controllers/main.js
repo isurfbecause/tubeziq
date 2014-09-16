@@ -59,8 +59,8 @@ angular.module('tubeziqApp')
 
         $scope.runEverySecond = function () {
             // Display playback time and duration
-            $scope.elapsedTime = $scope.getCurrentTime();
 
+            $scope.elapsedTime = $scope.getCurrentTime();
             // When done play next song
             if ($scope.playerStatus().isDone) {
                 $scope.skip('forward');
@@ -72,6 +72,7 @@ angular.module('tubeziqApp')
 
         // Display playback time and duration
         $scope.getCurrentTime = function () {
+            if( !$.isNumeric(ytplayer.getCurrentTime()) ){ return; }
             time = utilFactory.secondsToMinutes(ytplayer.getCurrentTime());
             elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
 

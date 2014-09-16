@@ -93,9 +93,8 @@ angular.module('tubeziqApp')
             $scope.selectedIndex = index;
             $scope.showControls = true;
             $scope.playIcon = 'fa-pause';
-            myytplayer.loadVideoById(songCode, 5, "large");
+            ytplayer.loadVideoById(songCode, 5, "large");
             playAudio = false;
-
             $scope.runEverySecond();
             $scope.songTitle = $scope.songs[index].title.$t;
         };
@@ -110,8 +109,9 @@ angular.module('tubeziqApp')
             }
             else {
                 clearTimeout($scope.timer);
+                $timeout.cancel($scope.timer);
                 $scope.playIcon = 'fa-play';
-                ytplayer.stopVideo()
+                ytplayer.stopVideo();
                 playAudio = true;
             }
         };

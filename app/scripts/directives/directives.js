@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('tubeziq.directives', [])
     // From http://stackoverflow.com/questions/17470790/how-to-use-a-keypress-event-in-angularjs
     .directive('tubeziqEnter', function () {
@@ -20,4 +22,23 @@ angular.module('tubeziq.directives', [])
                 element.focus();
             }
         };
+    })
+
+    .directive('tubesiqSlider', function(){
+        return{
+            link: function( scope, element, attrs){
+                console.log(element);
+                element.slider({
+                    orientation: "vertical",
+                    range: "min",
+                    min: 0,
+                    max: 100,
+                    value: 80,
+                    slide: function( event, ui ) {
+                        ytplayer.setVolume( ui.value );
+                    }
+                });
+            }
+        };
+        
     });

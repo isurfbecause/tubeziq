@@ -24,10 +24,30 @@
     height: 5.5em;
 }
 
+.playback-controls .elapsed-time{
+    margin-left: 25px;
+}
 
 .playback-controls .fa{
     margin-left: 20px;
     margin: 0.3em;
 }
 
+.ui-widget-header {
+    border: 1px solid #e78f08;
+    background: rgb(110, 92, 96)
+    color: #ffffff;
+    font-weight: bold;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #cccccc;
+    font-weight: bold;
+    color: #1c94c4;
+    width: 13px;
+    height: 12px;
+}
 
+.ui-widget-content {
+    border: 1px solid #151313;
+    background: black;
+}

@@ -18,11 +18,22 @@ angular.module('tubeziqApp')
         var duration = 0;
         var elSearch = $('#search');
 
-        $scope.term = ''; //Pre populate for easy testing
+        $scope.term = 'hiphop'; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer = 0;
         $scope.elapsedTime = '0:00 / 0:00';
+        $scope.searchTimeout = null;
+
+        $scope.autocomplete = function(){
+            if( $scope.searchTimeout ){
+                $timeout.cancel($scope.searchTimeout);
+            }
+            $scope.searchTimeout = $timeout(function(){
+                $scope.searchTimeout = null;
+                $scope.search();
+            }, 500);
+        };
 
         //On keydown spacebar play and pause playback
         angular.element($window).on('keydown', function (e) {

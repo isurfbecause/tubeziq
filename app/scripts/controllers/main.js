@@ -18,7 +18,7 @@ angular.module('tubeziqApp')
         var duration = 0;
         var elSearch = $('#search');
 
-        $scope.term = 'hiphop'; //Pre populate for easy testing
+        $scope.term = ''; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer = 0;

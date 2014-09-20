@@ -37,11 +37,11 @@
     </div>
 
     <div class="playback-controls" ng-show="showControls">
-        <i class="fa fa-step-backward fa-2x" ng-click="skip('backward')"></i>
-        <i class="fa {{ playIcon }} fa-2x" ng-click="play()"></i>
-        <i class="fa fa-step-forward fa-2x" ng-click="skip('forward')"></i>
-        <i class="fa {{ muteIcon }} fa-2x" ng-click="mute()"></i>
-        <span tubesiq-slider class="volume-slider"></span>
+        <i class="fa fa-step-backward fa-2x" ng-click="skip('backward')" title="Skip backward"></i>
+        <i class="fa {{ playIcon }} fa-2x" ng-click="play()" title="Play / Pause"></i>
+        <i class="fa fa-step-forward fa-2x" ng-click="skip('forward')" title="Skip forward"></i>
+        <i class="fa {{ muteIcon }} fa-2x" ng-click="mute()" title="Mute"></i>
+        <span tubesiq-slider class="volume-slider" title="Slide to adjust volume"></span>
         <span class="elapsed-time"> {{elapsedTime}} </span>
         <div>{{songTitle}}</div>
     </div>

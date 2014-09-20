@@ -26,11 +26,13 @@ angular.module('tubeziqApp')
         $scope.searchTimeout = null;
 
         $scope.autocomplete = function(){
+
+            //Cancel timeout if exists
             if( $scope.searchTimeout ){
-                $timeout.cancel($scope.searchTimeout);
+                $timeout.cancel( $scope.searchTimeout );
             }
+
             $scope.searchTimeout = $timeout(function(){
-                $scope.searchTimeout = null;
                 $scope.search();
             }, 500);
         };

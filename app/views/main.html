@@ -22,7 +22,7 @@
         <div class="input-group input-group-lg">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
             <input id="search" type="search" class="form-control" autocomplete="off" ng-model="term"
-                   tubeziq-enter="search()" tubeziq-focus ng-change="autocomplete()" placeholder="Search music">
+                   tubeziq-enter="search()" tq-Input-focus ng-change="autocomplete()" placeholder="Search music">
         </div>
         <p class="help-block">Examples: chillstep, hiphop 2014, bruno mars, maroon 5</p>
 
@@ -41,7 +41,7 @@
         <i class="fa {{ playIcon }} fa-2x" ng-click="play()" title="Play / Pause"></i>
         <i class="fa fa-step-forward fa-2x" ng-click="skip('forward')" title="Skip forward"></i>
         <i class="fa {{ muteIcon }} fa-2x" ng-click="mute()" title="Mute"></i>
-        <span tubeziq-slider class="volume-slider" title="Slide to adjust volume"></span>
+        <span tq-slider class="volume-slider" title="Slide to adjust volume"></span>
         <span class="elapsed-time"> {{elapsedTime}} </span>
         <div>{{songTitle}}</div>
     </div>

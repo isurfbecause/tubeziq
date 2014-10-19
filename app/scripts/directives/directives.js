@@ -2,7 +2,7 @@
 
 angular.module('tubeziq.directives', [])
 
-    .directive('tubesiqFocus', function () {
+    .directive('tubeziqFocus', function () {
         return{
             link: function(scope, element, attrs){
                 element.focus();
@@ -10,7 +10,7 @@ angular.module('tubeziq.directives', [])
         };
     })
 
-    .directive('tubesiqSlider', function(){
+    .directive('tubeziqSlider', function(){
         return{
             link: function( scope, element, attrs){
                 element.slider({

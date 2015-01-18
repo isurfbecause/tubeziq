@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tubeziqApp')
+angular.module('tq.player')
     //Refactor in youtube service
     .filter('extractYouTubeCode', ['$sce', function ($sce) {
         return function (url) {

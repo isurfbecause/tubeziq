@@ -1,15 +1,7 @@
 'use strict';
 
 angular.module('tq.player')
-    //Refactor in youtube service
-    .filter('extractYouTubeCode', ['$sce', function ($sce) {
-        return function (url) {
-            var code = url.split('&')[0].split('=')[1];
-            return code;
-        };
-    }])
-
-    .controller('MainCtrl', function ($scope, $http, $filter, $window, $timeout, utilFactory, services) {
+    .controller('playerController', function ($scope, $http, $filter, $window, $timeout, utilFactory, services) {
 
         var playAudio = true;
         var time = 0;

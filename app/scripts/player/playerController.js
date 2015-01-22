@@ -37,13 +37,13 @@ angular.module('tq.player')
                 $scope.$apply(function () {
                     $scope.play();
                 });
-                return false; // To prevent scroll down page when pressing spacebar
+                return false; // To prevent scroll down page when pressing space bar
             }
         });
 
         $scope.skip = function (action) {
             var newIndex = 0;
-            if (action === 'forward') {
+            if (action) {
                 newIndex = $scope.selectedIndex + 1;
             }
             else {
@@ -69,9 +69,10 @@ angular.module('tq.player')
             $scope.elapsedTime = $scope.getCurrentTime();
             // When done play next song
             if ($scope.playerStatus().isDone) {
-                $scope.skip('forward');
+                $scope.skip(true);
             }
 
+            //TODO: Use $interval
             // Update playback time every second
             $scope.timer = $timeout($scope.runEverySecond, 1000);
         };
@@ -79,7 +80,9 @@ angular.module('tq.player')
         // Display playback time and duration
         $scope.getCurrentTime = function () {
             var currentTime = ytplayer.getCurrentTime();
-            if( !$.isNumeric( currentTime ) ){ return; }
+
+            if(!$.isNumeric( currentTime)) { return; }
+
             time = utilFactory.secondsToMinutes( currentTime );
             elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
 
@@ -116,6 +119,7 @@ angular.module('tq.player')
                 playAudio = false;
             }
             else {
+                //TODO: Remove one of the cancel timeout functions
                 clearTimeout($scope.timer);
                 $timeout.cancel($scope.timer);
                 $scope.playIcon = 'fa-play';

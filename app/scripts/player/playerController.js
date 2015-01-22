@@ -15,16 +15,17 @@ angular.module('tq.player')
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer = 0;
         $scope.elapsedTime = '0:00 / 0:00';
-        $scope.searchTimeout = null;
 
         $scope.autocomplete = function(){
+            var searchTimeout = null;
 
             //Cancel timeout if exists
-            if( $scope.searchTimeout ){
-                $timeout.cancel( $scope.searchTimeout );
+            if(searchTimeout){
+                $timeout.cancel(searchTimeout);
             }
 
-            $scope.searchTimeout = $timeout(function(){
+            //Call search() after timeout duration
+            searchTimeout = $timeout(function(){
                 $scope.search();
             }, 500);
         };
@@ -32,11 +33,11 @@ angular.module('tq.player')
         //On keydown spacebar play and pause playback
         angular.element($window).on('keydown', function (e) {
 
-            if (e.keyCode === 32 && $scope.songs && !elSearch.is(":focus")) {
+            if (e.keyCode === 32 && $scope.songs && !elSearch.is(':focus')) {
                 $scope.$apply(function () {
                     $scope.play();
                 });
-                return false; // To prevent scroll down page
+                return false; // To prevent scroll down page when pressing spacebar
             }
         });
 

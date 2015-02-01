@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('tq.player')
-    .controller('playerController', function ($scope, $http, $filter, $window, $timeout, utilFactory, services) {
+    .controller('playerController', ['$scope', '$filter', '$window', '$timeout', 'utilFactory', 'services',
+        'PLAYER_CONTROL', function($scope, $filter, $window, $timeout, utilFactory, services,
+        PLAYER_CONTROL) {
 
         var playAudio = true;
         var time = 0;
@@ -9,22 +11,12 @@ angular.module('tq.player')
         var durationTime = 0;
         var duration = 0;
         var elSearch = $('#search');
-        var ytplayer = null;
 
         $scope.term = ''; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
-        $scope.muteIcon = 'fa-volume-up';
+        $scope.muteIcon = PLAYER_CONTROL.volumneUp;
         $scope.timer = 0;
         $scope.elapsedTime = '0:00 / 0:00';
-
-        $scope.init = function() {
-            //Code from YOUTUBE
-            //This code loads the IFrame Player API code asynchronously.
-            var tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        };
 
         $scope.autocomplete = function(){
             var searchTimeout = null;
@@ -165,4 +157,4 @@ angular.module('tq.player')
                 });
 
         };
-    });
+    }]);

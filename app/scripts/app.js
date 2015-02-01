@@ -15,22 +15,10 @@ angular.module('tq.player', []);
 //Main app
 angular.module('tq', [
     'tq.config',
+    'tq.constants',
     'tq.directives',
     'tq.filters',
-    'tq.services',
     'tq.player',
-    'ngRoute',
-    'tq.constants',
-    'ytplayer'
+    'tq.services',
+    'ngRoute'
 ]);
-
-/*
-//Make youtupbe ytplayer object a module
- Provides a way to inject vendor libraries that otherwise are globals. This improves code testability
- by allowing you to more easily know what the dependencies of your components are (avoids leaky abstractions).
- It also allows you to mock these dependencies, where it makes sense.
-*/
-angular.module('ytplayer', [])
-    .factory('ytplayer', function() {
-  return window.ytplayer;
-});

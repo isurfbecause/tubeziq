@@ -155,6 +155,5 @@ angular.module('tq.player')
                 }).
                 error(function (data, status, headers, config) {
                 });
-
         };
     }]);

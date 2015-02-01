@@ -6,7 +6,7 @@ angular.module('tq.constants')
             volumneUp: 'fa-volume-up',
             volumneDown: 'fa-volume-down',
             volumeOff: 'fa-volume-off',
-            play: 'fa-volume-up',
+            play: 'fa-play',
             pause: 'fa-pause'
         }
     });

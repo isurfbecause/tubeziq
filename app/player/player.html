@@ -18,15 +18,7 @@
         </ul>
     </div>
 
-    <div class="playback-controls" ng-show="showControls">
-        <i class="fa fa-step-backward fa-2x" ng-click="skip(false)" title="Skip backward"></i>
-        <i class="fa {{ playIcon }} fa-2x" ng-click="play()" title="Play / Pause"></i>
-        <i class="fa fa-step-forward fa-2x" ng-click="skip(true)" title="Skip forward"></i>
-        <i class="fa {{ muteIcon }} fa-2x" ng-click="mute()" title="Mute"></i>
-        <span tq-slider class="volume-slider" title="Slide to adjust volume"></span>
-        <span class="elapsed-time"> {{elapsedTime}} </span>
-        <div>{{songTitle}}</div>
-    </div>
+    <playback-control data-config="playbackControll"></playback-control>
 
 	<div id="ytapiplayer"></div>
 </div>

@@ -12,7 +12,7 @@
     background-color: #FFFFFF;
 }
 
-.playback-controls{
+.playback-control{
     margin-left: 20px;
     position: fixed;
     bottom: 0;
@@ -24,11 +24,11 @@
     height: 5.5em;
 }
 
-.playback-controls .elapsed-time{
+.playback-control .elapsed-time{
     margin-left: 25px;
 }
 
-.playback-controls .fa{
+.playback-control .fa{
     margin-left: 20px;
     margin: 0.3em;
 }

@@ -5,18 +5,19 @@ angular.module('tq.player')
         'PLAYER', function($scope, $filter, $window, $timeout, utilFactory, services,
         PLAYER) {
 
-        var playAudio = true;
         var time = 0;
         var elapsedTime = 0;
         var durationTime = 0;
         var duration = 0;
         var elSearch = $('#search');
 
+        $scope.playAudio = true;
         $scope.term = ''; //Pre populate for easy testing
-        $scope.playIcon = PLAYER.icon.play;
-        $scope.muteIcon = PLAYER.icon.volumneUp;
+        $scope.playbackControl = {};
+        $scope.playbackControl.playIcon = PLAYER.icon.play;
+        $scope.playbackControl.muteIcon = PLAYER.icon.volumneUp;
         $scope.timer = 0;
-        $scope.elapsedTime = '0:00 / 0:00';
+        $scope.playbackControl.elapsedTime = '0:00 / 0:00';
 
         $scope.autocomplete = function(){
             var searchTimeout = null;
@@ -68,7 +69,7 @@ angular.module('tq.player')
         $scope.runEverySecond = function () {
             // Display playback time and duration
 
-            $scope.elapsedTime = $scope.getCurrentTime();
+            $scope.playbackControl.elapsedTime = $scope.getCurrentTime();
             // When done play next song
             if ($scope.playerStatus().isDone) {
                 $scope.skip(true);
@@ -104,42 +105,12 @@ angular.module('tq.player')
             var songUrl = $scope.getYouTubeUrl(index);
             var songCode = $filter('extractYouTubeCode')(songUrl);
             $scope.selectedIndex = index;
-            $scope.showControls = true;
-            $scope.playIcon = PLAYER.icon.pause;
+            $scope.playbackControl.showControl = true;
+            $scope.playbackControl.playIcon = PLAYER.icon.pause;
             ytplayer.loadVideoById(songCode, 5, 'large');
-            playAudio = false;
+            $scope.playAudio = false;
             $scope.runEverySecond();
-            $scope.songTitle = $scope.songs[index].title.$t;
-        };
-
-        // Play and pause
-        $scope.play = function () {
-            if (playAudio) {
-                $scope.playIcon = PLAYER.icon.pause;
-                ytplayer.playVideo();
-                $scope.runEverySecond();
-                playAudio = false;
-            }
-            else {
-                //TODO: Remove one of the cancel timeout functions
-                clearTimeout($scope.timer);
-                $timeout.cancel($scope.timer);
-                $scope.playIcon = PLAYER.icon.play;
-                ytplayer.stopVideo();
-                playAudio = true;
-            }
-        };
-
-        // Mute playback
-        $scope.mute = function () {
-            if (ytplayer.isMuted()) {
-                $scope.muteIcon = PLAYER.icon.volumneUp;
-                ytplayer.unMute();
-            }
-            else {
-                $scope.muteIcon = PLAYER.icon.volumneOff;
-                ytplayer.mute();
-            }
+            $scope.playbackControl.songTitle = $scope.songs[index].title.$t;
         };
 
         $scope.search = function () {

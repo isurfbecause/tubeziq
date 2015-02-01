@@ -1,0 +1,9 @@
+<div class="playback-control" ng-show="playbackControl.showControl">
+    <i class="fa fa-step-backward fa-2x" ng-click="skip(false)" title="Skip backward"></i>
+    <i class="fa {{ playbackControl.playIcon }} fa-2x" ng-click="play()" title="Play / Pause"></i>
+    <i class="fa fa-step-forward fa-2x" ng-click="skip(true)" title="Skip forward"></i>
+    <i class="fa {{ playbackControl.muteIcon }} fa-2x" ng-click="mute()" title="Mute"></i>
+    <span tq-slider class="volume-slider" title="Slide to adjust volume"></span>
+    <span class="elapsed-time"> {{playbackControl.elapsedTime}} </span>
+    <div>{{playbackControl.songTitle}}</div>
+</div>

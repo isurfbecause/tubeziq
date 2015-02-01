@@ -2,8 +2,8 @@
 
 angular.module('tq.player')
     .controller('playerController', ['$scope', '$filter', '$window', '$timeout', 'utilFactory', 'services',
-        'PLAYER_CONTROL', function($scope, $filter, $window, $timeout, utilFactory, services,
-        PLAYER_CONTROL) {
+        'PLAYER', function($scope, $filter, $window, $timeout, utilFactory, services,
+        PLAYER) {
 
         var playAudio = true;
         var time = 0;
@@ -13,8 +13,8 @@ angular.module('tq.player')
         var elSearch = $('#search');
 
         $scope.term = ''; //Pre populate for easy testing
-        $scope.playIcon = 'fa-play';
-        $scope.muteIcon = PLAYER_CONTROL.volumneUp;
+        $scope.playIcon = PLAYER.icon.play;
+        $scope.muteIcon = PLAYER.icon.volumneUp;
         $scope.timer = 0;
         $scope.elapsedTime = '0:00 / 0:00';
 
@@ -105,7 +105,7 @@ angular.module('tq.player')
             var songCode = $filter('extractYouTubeCode')(songUrl);
             $scope.selectedIndex = index;
             $scope.showControls = true;
-            $scope.playIcon = 'fa-pause';
+            $scope.playIcon = PLAYER.icon.pause;
             ytplayer.loadVideoById(songCode, 5, 'large');
             playAudio = false;
             $scope.runEverySecond();
@@ -115,7 +115,7 @@ angular.module('tq.player')
         // Play and pause
         $scope.play = function () {
             if (playAudio) {
-                $scope.playIcon = 'fa-pause';
+                $scope.playIcon = PLAYER.icon.pause;
                 ytplayer.playVideo();
                 $scope.runEverySecond();
                 playAudio = false;
@@ -124,7 +124,7 @@ angular.module('tq.player')
                 //TODO: Remove one of the cancel timeout functions
                 clearTimeout($scope.timer);
                 $timeout.cancel($scope.timer);
-                $scope.playIcon = 'fa-play';
+                $scope.playIcon = PLAYER.icon.play;
                 ytplayer.stopVideo();
                 playAudio = true;
             }
@@ -133,11 +133,11 @@ angular.module('tq.player')
         // Mute playback
         $scope.mute = function () {
             if (ytplayer.isMuted()) {
-                $scope.muteIcon = 'fa-volume-up';
+                $scope.muteIcon = PLAYER.icon.volumneUp;
                 ytplayer.unMute();
             }
             else {
-                $scope.muteIcon = 'fa-volume-off';
+                $scope.muteIcon = PLAYER.icon.volumneOff;
                 ytplayer.mute();
             }
         };

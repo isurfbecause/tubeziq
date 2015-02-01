@@ -9,12 +9,22 @@ angular.module('tq.player')
         var durationTime = 0;
         var duration = 0;
         var elSearch = $('#search');
+        var ytplayer = null;
 
         $scope.term = ''; //Pre populate for easy testing
         $scope.playIcon = 'fa-play';
         $scope.muteIcon = 'fa-volume-up';
         $scope.timer = 0;
         $scope.elapsedTime = '0:00 / 0:00';
+
+        $scope.init = function() {
+            //Code from YOUTUBE
+            //This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        };
 
         $scope.autocomplete = function(){
             var searchTimeout = null;
@@ -104,7 +114,7 @@ angular.module('tq.player')
             $scope.selectedIndex = index;
             $scope.showControls = true;
             $scope.playIcon = 'fa-pause';
-            ytplayer.loadVideoById(songCode, 5, "large");
+            ytplayer.loadVideoById(songCode, 5, 'large');
             playAudio = false;
             $scope.runEverySecond();
             $scope.songTitle = $scope.songs[index].title.$t;
@@ -142,9 +152,8 @@ angular.module('tq.player')
 
         $scope.search = function () {
             // Validate
-            if (!$scope.term.length) {
-                return;
-            }
+            if (!$scope.term.length) { return; }
+
             $scope.selectedIndex = -1;
             var options = {searchTerm: $scope.term, maxResults: 20 };
 

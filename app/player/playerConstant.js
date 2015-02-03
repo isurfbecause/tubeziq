@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tq.constants')
-    .constant('PLAYER',{
+    .constant('PLAYER', {
         icon: {
             volumneUp: 'fa-volume-up',
             volumneDown: 'fa-volume-down',

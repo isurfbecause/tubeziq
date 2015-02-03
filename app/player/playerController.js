@@ -19,37 +19,36 @@ angular.module('tq.player')
         $scope.timer = 0;
         $scope.playbackControl.elapsedTime = '0:00 / 0:00';
 
-        $scope.autocomplete = function(){
+        $scope.autocomplete = function() {
             var searchTimeout = null;
 
             //Cancel timeout if exists
-            if(searchTimeout){
+            if (searchTimeout) {
                 $timeout.cancel(searchTimeout);
             }
 
             //Call search() after timeout duration
-            searchTimeout = $timeout(function(){
+            searchTimeout = $timeout(function() {
                 $scope.search();
             }, 500);
         };
 
         //On keydown spacebar play and pause playback
-        angular.element($window).on('keydown', function (e) {
+        angular.element($window).on('keydown', function(e) {
 
             if (e.keyCode === 32 && $scope.songs && !elSearch.is(':focus')) {
-                $scope.$apply(function () {
+                $scope.$apply(function() {
                     $scope.play();
                 });
                 return false; // To prevent scroll down page when pressing space bar
             }
         });
 
-        $scope.skip = function (action) {
+        $scope.skip = function(action) {
             var newIndex = 0;
             if (action) {
                 newIndex = $scope.selectedIndex + 1;
-            }
-            else {
+            } else {
                 newIndex = $scope.selectedIndex - 1;
             }
 
@@ -57,8 +56,8 @@ angular.module('tq.player')
         };
 
         //Refactor to youtube service
-        $scope.playerStatus = function () {
-            return{
+        $scope.playerStatus = function() {
+            return {
                 isDone: ytplayer.getPlayerState() === 0,
                 isPlaying: ytplayer.getPlayerState() === 1,
                 isPaused: ytplayer.getPlayerState() === 2,
@@ -66,7 +65,7 @@ angular.module('tq.player')
             };
         };
 
-        $scope.runEverySecond = function () {
+        $scope.runEverySecond = function() {
             // Display playback time and duration
 
             $scope.playbackControl.elapsedTime = $scope.getCurrentTime();
@@ -81,27 +80,27 @@ angular.module('tq.player')
         };
 
         // Display playback time and duration
-        $scope.getCurrentTime = function () {
+        $scope.getCurrentTime = function() {
             var currentTime = ytplayer.getCurrentTime();
 
-            if(!$.isNumeric( currentTime)) { return; }
+            if (!$.isNumeric(currentTime)) { return; }
 
-            time = utilFactory.secondsToMinutes( currentTime );
+            time = utilFactory.secondsToMinutes(currentTime);
             elapsedTime = time.minutes.toFixed() + ':' + time.seconds.toFixed();
 
-            durationTime = utilFactory.secondsToMinutes( ytplayer.getDuration() );
+            durationTime = utilFactory.secondsToMinutes(ytplayer.getDuration());
             duration = durationTime.minutes.toFixed() + ':' + durationTime.seconds.toFixed();
 
             return elapsedTime + ' / ' + duration;
         };
 
         // Refactor in youtube service
-        $scope.getYouTubeUrl = function (index) {
+        $scope.getYouTubeUrl = function(index) {
             return $scope.songs[index].link[0].href;
         };
 
         // Load song selected from search results
-        $scope.loadSong = function (index) {
+        $scope.loadSong = function(index) {
             var songUrl = $scope.getYouTubeUrl(index);
             var songCode = $filter('extractYouTubeCode')(songUrl);
             $scope.selectedIndex = index;
@@ -113,7 +112,7 @@ angular.module('tq.player')
             $scope.playbackControl.songTitle = $scope.songs[index].title.$t;
         };
 
-        $scope.search = function () {
+        $scope.search = function() {
             // Validate
             if (!$scope.term.length) { return; }
 
@@ -121,10 +120,10 @@ angular.module('tq.player')
             var options = {searchTerm: $scope.term, maxResults: 20 };
 
             services.search(options)
-                .success(function (data) {
+                .success(function(data) {
                     $scope.songs = data.feed.entry;
                 }).
-                error(function (data, status, headers, config) {
+                error(function(data, status, headers, config) {
                 });
         };
     }]);

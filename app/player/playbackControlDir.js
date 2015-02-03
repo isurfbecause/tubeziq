@@ -1,20 +1,19 @@
 'use strict';
 
 angular.module('tq.directives')
-    .directive('playbackControl', ['$timeout', 'PLAYER', function($timeout, PLAYER){
+    .directive('playbackControl', ['$timeout', 'PLAYER', function($timeout, PLAYER) {
         return {
             restrict: 'E',
             templateUrl: 'player/playbackControlsDir.html',
             controller: function($scope) {
                 // Play and pause
-                $scope.play = function () {
+                $scope.play = function() {
                     if ($scope.playAudio) {
                         $scope.playbackControl.playIcon = PLAYER.icon.pause;
                         ytplayer.playVideo();
                         $scope.runEverySecond();
                         $scope.playAudio = false;
-                    }
-                    else {
+                    } else {
                         //TODO: Remove one of the cancel timeout functions
                         clearTimeout($scope.timer);
                         $timeout.cancel($scope.timer);
@@ -24,12 +23,11 @@ angular.module('tq.directives')
                     }
                 };
 
-                $scope.mute = function () {
+                $scope.mute = function() {
                     if (ytplayer.isMuted()) {
                         $scope.playbackControl.muteIcon = PLAYER.icon.volumneUp;
                         ytplayer.unMute();
-                    }
-                    else {
+                    } else {
                         $scope.playbackControl.muteIcon = PLAYER.icon.volumeOff;
                         ytplayer.mute();
                     }
@@ -37,5 +35,3 @@ angular.module('tq.directives')
             }
         };
     }]);
-
-

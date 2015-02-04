@@ -18,8 +18,23 @@
         </ul>
     </div>
 
-    <playback-control data-config="playbackControll"></playback-control>
+    <playback-control data-config="playbackControl"></playback-control>
 
 	<div id="ytapiplayer"></div>
 </div>
+
+<!-- TODO: Find a better way to include this -->
+<script type="text/javascript">
+var tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+function onYouTubeIframeAPIReady() {
+ytplayer = new YT.Player('player', {
+    height: '0',
+    width: '0',
+    videoId: 'M7lc1UVf-VE'
+});
+}
+</script>
 

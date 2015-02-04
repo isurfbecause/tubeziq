@@ -1,5 +1,6 @@
 module.exports = function() {
     var app = './app/';
+    var temp = './.tmp/';
     var config = {
         path: {
             alljs: [
@@ -8,13 +9,18 @@ module.exports = function() {
             ],
             app: app,
             js:[
-                app + 'app.js',
+                app + '**/app.js',
+                app + '**/app.config.js',
+                app + '**/directives/*.js',
+                app + '**/services/*.js',
+                app + '**/filters/*.js',
                 app + '**/*.js',
                 '!' + app + '**/*spec.js'
             ],
+            css: temp + 'styles.css',
             index: app + 'index.html',
             sass: app + 'styles/**/*.scss',
-            temp: './.tmp/'
+            temp: temp
         },
         vendor: {
             autoprefixerBrowsers: [

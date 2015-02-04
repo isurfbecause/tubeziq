@@ -6,10 +6,12 @@ var config = require('./gulp.config.js')(); // config file
 gulp.task('wiredep', function() {
     var options = config.vendor.getWiredepOptions();
     var wiredep = require('wiredep').stream;
+    console.log(config.path.css);
     return gulp
         .src(config.path.index)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.path.js)))
+        .pipe($.inject(gulp.src(config.path.css)))
         .pipe(gulp.dest(config.path.app));
 });
 

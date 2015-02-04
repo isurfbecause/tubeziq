@@ -5,13 +5,16 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="../bower_components/jquery-ui/jquery-ui.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../.tmp/styles.css">
-    <!-- endbuild -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
+    <!-- endbower -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/.tmp/styles.css">
+    <!-- endinject -->
+
   </head>
   <body ng-app="tq">
 
@@ -28,36 +31,25 @@
       </div>
     </div>
 
-    <!-- Vendor -->
-    <!-- bower: css -->
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
 
-    <!-- bower: js -->
+    <!-- inject:js -->
+    <script src="/app/scripts/app.js"></script>
+    <script src="/app/scripts/app.config.js"></script>
+    <script src="/app/scripts/directives/tqInputFocus.js"></script>
+    <script src="/app/scripts/directives/tqSlider.js"></script>
+    <script src="/app/scripts/services/services.js"></script>
+    <script src="/app/scripts/services/utils.js"></script>
+    <script src="/app/scripts/filters/extractYouTubeCodeFilter.js"></script>
+    <script src="/app/player/playbackControlDir.js"></script>
+    <script src="/app/player/playerConstant.js"></script>
+    <script src="/app/player/playerController.js"></script>
+    <!-- endinject -->
 
-    <!-- endbower -->
-
-   <!--  <script src="../bower_components/ytplayer/ytplayer.js"></script>
-    <!-- App -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/app.config.js"></script>
-
-    <!-- Controllers -->
-    <script src="player/playerController.js"></script>
-
-    <!-- Directives -->
-    <script src="scripts/directives/tqSlider.js"></script>
-    <script src="scripts/directives/tqInputFocus.js"></script>
-    <script src="player/playbackControlDir.js"></script>
-
-    <!-- Filters -->
-    <script src="scripts/filters/extractYouTubeCodeFilter.js"></script>
-
-    <!-- Services -->
-    <script src="scripts/services/utils.js"></script>
-    <script src="scripts/services/services.js"></script>
-
-    <!-- Constants -->
-    <script src="player/playerConstant.js"></script>
- -->
 </body>
 </html>

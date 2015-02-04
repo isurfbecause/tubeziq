@@ -4,6 +4,7 @@ angular.module('tq.directives')
     .directive('playbackControl', ['$timeout', 'PLAYER', function($timeout, PLAYER) {
         return {
             restrict: 'E',
+            require: '^tqSlider',
             templateUrl: 'player/playbackControlsDir.html',
             controller: function($scope) {
                 // Play and pause

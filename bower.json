@@ -1,0 +1,24 @@
+{
+  "name": "tubeziq",
+  "version": "1",
+  "authors": [
+    "winston_yee <winsyee@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "angular": "~1.2.23",
+    "angular-route": "~1.2.23"
+  }
+}

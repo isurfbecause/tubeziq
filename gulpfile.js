@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({lazy: true});
 var del = require('del');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 var config = require('./gulp.config.js')(); // config file
 
 gulp.task('wiredep', function() {
@@ -16,7 +18,7 @@ gulp.task('wiredep', function() {
 });
 
 // Run jscs and jshint
-gulp.task('lint', function() {
+gulp.task('jshint', function() {
     gulp.src(config.path.alljs)
     .pipe($.jscs())
     .pipe($.jshint());
@@ -39,6 +41,16 @@ gulp.task('sass-watcher', function() {
 gulp.task('remove-styles', function(done) {
     var files = config.path.temp + '**/*.css';
     remove(files, done);
+});
+
+gulp.task('serve', ['styles'], function() {
+    browserSync({
+        notify: false,
+        server: ['./', config.path.temp, config.path.app]
+    });
+
+    gulp.watch([config.path.sass], ['styles', reload]);
+    gulp.watch([config.path.alljs], ['jshint']);
 });
 
 function remove(path, done) {

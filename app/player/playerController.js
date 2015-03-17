@@ -19,9 +19,8 @@ angular.module('tq.player')
         $scope.timer = 0;
         $scope.playbackControl.elapsedTime = '0:00 / 0:00';
 
+        var searchTimeout = null;
         $scope.autocomplete = function() {
-            var searchTimeout = null;
-
             //Cancel timeout if exists
             if (searchTimeout) {
                 $timeout.cancel(searchTimeout);
@@ -35,7 +34,6 @@ angular.module('tq.player')
 
         //On keydown spacebar play and pause playback
         angular.element($window).on('keydown', function(e) {
-
             if (e.keyCode === 32 && $scope.songs && !elSearch.is(':focus')) {
                 $scope.$apply(function() {
                     $scope.play();

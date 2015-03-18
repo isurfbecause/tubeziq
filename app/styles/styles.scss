@@ -44,6 +44,11 @@ $white : #FFFFFF;
     color: $white;
     font-weight: bold;
 }
+
+.ui-slider-vertical {
+    padding: 10px 0px;
+}
+
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     border: 1px solid #cccccc;
     font-weight: bold;

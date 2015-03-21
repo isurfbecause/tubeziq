@@ -4,8 +4,7 @@
   padding: 0; }
   .results ul li {
     margin: .1em; }
-
-.results-result-active {
+.results .result-active {
   background-color: #FFFFFF; }
 
 .playback-control {
@@ -21,7 +20,6 @@
 
 .playback-control .elapsed-time {
   margin-left: 25px; }
-
 .playback-control .fa {
   margin-left: 20px;
   margin: 0.3em; }

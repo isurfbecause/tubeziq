@@ -11,10 +11,10 @@ $white : #FFFFFF;
             margin: .1em;
         }
     }
-}
 
-.results-result-active{
-    background-color: $white;
+    .result-active{
+        background-color: $white;
+    }
 }
 
 .playback-control{
@@ -29,15 +29,18 @@ $white : #FFFFFF;
     height: 5.5em;
 }
 
-.playback-control .elapsed-time{
-    margin-left: 25px;
+.playback-control {
+    .elapsed-time{
+        margin-left: 25px;
+    }
+
+    .fa{
+        margin-left: 20px;
+        margin: 0.3em;
+    }
 }
 
-.playback-control .fa{
-    margin-left: 20px;
-    margin: 0.3em;
-}
-
+//Override jQueryUI styles
 .ui-widget-header {
     border: 1px solid #e78f08;
     background: rgb(110, 92, 96);
@@ -49,7 +52,9 @@ $white : #FFFFFF;
     padding: 10px 0px;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
     border: 1px solid #cccccc;
     font-weight: bold;
     color: #1c94c4;

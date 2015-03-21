@@ -4,15 +4,14 @@
     <div class="form-group">
         <div class="input-group input-group-lg">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input id="search" type="search" class="form-control" autocomplete="off" ng-model="term"
-                   tubeziq-enter="search()" autofocus="true" ng-change="autocomplete()" placeholder="Search music">
+            <input id="search" type="search" class="form-control" autocomplete="off" ng-model="term" autofocus="true" ng-change="autocomplete()" placeholder="Search music">
         </div>
         <p class="help-block">Examples: chillstep, hiphop 2014, bruno mars, maroon 5</p>
     </div>
 
     <div class="results">
         <ul>
-            <li ng-repeat="song in songs" ng-class="{'results-result-active': $index == selectedIndex}">
+            <li ng-repeat="song in songs" ng-class="{'result-active': $index == selectedIndex}">
                 <a href ng-click="loadSong($index)">{{$index + 1}}. {{song.title.$t}}</a>
             </li>
         </ul>

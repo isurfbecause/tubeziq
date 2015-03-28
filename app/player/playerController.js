@@ -116,7 +116,6 @@ angular.module('tq.player')
 
             $scope.selectedIndex = -1;
             var options = {searchTerm: $scope.term, maxResults: 20 };
-
             services.search(options)
                 .success(function(data) {
                     $scope.songs = data.feed.entry;
